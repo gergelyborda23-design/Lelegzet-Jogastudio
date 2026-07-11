@@ -21,8 +21,8 @@ Hero · Óratípusok · Rólunk · Oktatók · Órarend · Bérletek · Visszaje
 ## Képek
 
 A fotók a [Pexels](https://www.pexels.com/)-ről származnak, szabadon felhasználható licenc alatt.
-A képfájlok **nincsenek benne a repóban** — a teljes vizuális eredmény a fenti
-teljes oldal renderen (PNG) látható.
+Az oldal által használt 7 kép a repóban is megtalálható (`webdesign figma/stock fotók/`),
+így az `index.html` önmagában, deploy után is teljes képekkel jelenik meg.
 
 ---
 
