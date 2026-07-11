@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lélegzet — Arculattábla</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F4EFE6; --cream-deep:#EAE2D3; --surface:#FBF8F2;
+    --ink:#2B2A26; --ink-soft:#6E6A5F;
+    --olive:#57634A; --olive-hover:#454F3A; --olive-deep:#2E3626;
+    --clay:#B06B4E; --sand:#DED6C5; --cream-on-dark:#F1ECE0;
+    --r-sm:12px; --r-md:20px; --r-lg:32px; --r-pill:999px;
+    --shadow-sm:0 2px 10px rgba(60,50,30,.05);
+    --shadow-md:0 12px 40px rgba(60,50,30,.08);
+    --shadow-lg:0 26px 70px rgba(50,42,26,.12);
+    --font-display:'Fraunces',Georgia,serif;
+    --font-body:'Manrope',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--cream);color:var(--ink);font-family:var(--font-body);
+    line-height:1.7;-webkit-font-smoothing:antialiased;padding:56px}
+  .board{max-width:1080px;margin:0 auto}
+  .eyebrow{font-size:.8rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--olive)}
+  h1{font-family:var(--font-display);font-weight:400;font-size:3.4rem;line-height:1.05;margin:10px 0 6px}
+  .lead{color:var(--ink-soft);max-width:52ch;font-size:1.0625rem}
+  .row{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px}
+  section{margin-top:56px}
+  h2{font-family:var(--font-display);font-weight:400;font-size:1.9rem;margin-bottom:22px;
+    padding-bottom:12px;border-bottom:1px solid var(--sand)}
+
+  /* Palette */
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
+  .sw{border-radius:var(--r-md);overflow:hidden;border:1px solid var(--sand);background:var(--surface);box-shadow:var(--shadow-sm)}
+  .sw .chip{height:88px}
+  .sw .meta{padding:12px 14px}
+  .sw .name{font-weight:600;font-size:.92rem}
+  .sw .hex{color:var(--ink-soft);font-size:.82rem;letter-spacing:.03em}
+  .sw .role{color:var(--ink-soft);font-size:.78rem;margin-top:4px;line-height:1.4}
+
+  /* Type scale */
+  .type-item{padding:16px 0;border-bottom:1px dashed var(--sand)}
+  .type-item:last-child{border-bottom:0}
+  .type-tag{font-size:.75rem;color:var(--ink-soft);letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px}
+  .t-display{font-family:var(--font-display);font-weight:400;font-size:4rem;line-height:1.05}
+  .t-h2{font-family:var(--font-display);font-weight:400;font-size:2.6rem}
+  .t-h3{font-family:var(--font-display);font-weight:500;font-size:1.375rem}
+  .t-body{font-size:1.0625rem;max-width:60ch}
+  .t-eyebrow{font-size:.8rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--olive)}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-weight:600;
+    font-size:1rem;padding:15px 30px;border-radius:var(--r-pill);border:1.5px solid transparent;
+    cursor:pointer;transition:all .25s ease;text-decoration:none}
+  .btn-primary{background:var(--olive);color:var(--cream-on-dark)}
+  .btn-primary:hover{background:var(--olive-hover);transform:translateY(-2px);box-shadow:var(--shadow-md)}
+  .btn-secondary{background:transparent;border-color:var(--olive);color:var(--olive)}
+  .btn-secondary:hover{background:var(--olive);color:var(--cream-on-dark)}
+
+  /* Cards */
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+  .card{background:var(--surface);border:1px solid var(--sand);border-radius:var(--r-lg);
+    padding:28px;box-shadow:var(--shadow-sm)}
+  .card.highlight{border:1.5px solid var(--olive);position:relative}
+  .badge{position:absolute;top:-11px;left:28px;background:var(--clay);color:#fff;font-size:.7rem;
+    font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:var(--r-pill)}
+  .card h3{font-family:var(--font-display);font-weight:500;font-size:1.3rem;margin-bottom:8px}
+  .card p{color:var(--ink-soft);font-size:.95rem}
+  .radii{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-end}
+  .radii .demo{background:var(--olive);width:96px;height:72px}
+  .radii .lab{font-size:.8rem;color:var(--ink-soft);margin-top:8px;text-align:center}
+  .shadows{display:flex;gap:28px;flex-wrap:wrap}
+  .shadows .box{width:130px;height:88px;background:var(--surface);border-radius:var(--r-md)}
+  .foot{margin-top:64px;padding-top:20px;border-top:1px solid var(--sand);color:var(--ink-soft);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="board">
+  <header>
+    <div class="eyebrow">Arculattábla · Design rendszer</div>
+    <h1>Lélegzet</h1>
+    <p class="lead">Meleg, földes, prémium jóga-arculat egy kis újbudai stúdióhoz. Nyugalom, természetes fény, lassú tempó.</p>
+  </header>
+
+  <section>
+    <h2>Színpaletta</h2>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#F4EFE6"></div><div class="meta"><div class="name">Cream</div><div class="hex">#F4EFE6</div><div class="role">Fő háttér</div></div></div>
+      <div class="sw"><div class="chip" style="background:#EAE2D3"></div><div class="meta"><div class="name">Cream Deep</div><div class="hex">#EAE2D3</div><div class="role">Váltakozó szakasz</div></div></div>
+      <div class="sw"><div class="chip" style="background:#FBF8F2"></div><div class="meta"><div class="name">Surface</div><div class="hex">#FBF8F2</div><div class="role">Kártya / felület</div></div></div>
+      <div class="sw"><div class="chip" style="background:#57634A"></div><div class="meta"><div class="name">Olive</div><div class="hex">#57634A</div><div class="role">Primer akcentus</div></div></div>
+      <div class="sw"><div class="chip" style="background:#2E3626"></div><div class="meta"><div class="name">Olive Deep</div><div class="hex">#2E3626</div><div class="role">Sötét szakasz / footer</div></div></div>
+      <div class="sw"><div class="chip" style="background:#B06B4E"></div><div class="meta"><div class="name">Clay</div><div class="hex">#B06B4E</div><div class="role">Pont-szín (takarékosan)</div></div></div>
+      <div class="sw"><div class="chip" style="background:#2B2A26"></div><div class="meta"><div class="name">Ink</div><div class="hex">#2B2A26</div><div class="role">Fő szöveg</div></div></div>
+      <div class="sw"><div class="chip" style="background:#DED6C5"></div><div class="meta"><div class="name">Sand</div><div class="hex">#DED6C5</div><div class="role">Szegély / elválasztó</div></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tipográfia — Fraunces &amp; Manrope</h2>
+    <div class="type-item"><div class="type-tag">Eyebrow · Manrope 600</div><div class="t-eyebrow">Jógastúdió · Újbuda</div></div>
+    <div class="type-item"><div class="type-tag">Display / H1 · Fraunces 400</div><div class="t-display">Lassíts le.</div></div>
+    <div class="type-item"><div class="type-tag">H2 · Fraunces 400</div><div class="t-h2">Egy hely, ahol leteheted a napodat</div></div>
+    <div class="type-item"><div class="type-tag">H3 · Fraunces 500</div><div class="t-h3">Vinyasa Flow</div></div>
+    <div class="type-item"><div class="type-tag">Törzs · Manrope 400</div><p class="t-body">Kis létszámú jógaórák Újbuda szívében, kezdőtől a haladóig. Nálunk nincs verseny, csak a saját tempód.</p></div>
+  </section>
+
+  <section>
+    <h2>Gombok</h2>
+    <div class="row">
+      <a class="btn btn-primary" href="#">Foglalj próbaórát →</a>
+      <a class="btn btn-secondary" href="#">Órarend megtekintése</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Kártyák</h2>
+    <div class="cards">
+      <div class="card"><h3>Hatha</h3><p>Lassabb tempó, tartott pózok, sok figyelem a technikára. Ideális, ha most kezded.</p></div>
+      <div class="card highlight"><span class="badge">Legnépszerűbb</span><h3>Havi bérlet</h3><p>Korlátlan óralátogatás egy hónapon át. A legjobb ár, ha heti kétszer jössz.</p></div>
+      <div class="card"><h3>Yin</h3><p>Földközeli, hosszan tartott pózok, mélyfeszültség-oldás. Esti óra.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Forma &amp; árnyék</h2>
+    <div class="radii">
+      <div><div class="demo" style="border-radius:12px"></div><div class="lab">12px · sm</div></div>
+      <div><div class="demo" style="border-radius:20px"></div><div class="lab">20px · md</div></div>
+      <div><div class="demo" style="border-radius:32px"></div><div class="lab">32px · lg</div></div>
+      <div><div class="demo" style="border-radius:999px"></div><div class="lab">pill</div></div>
+    </div>
+    <div class="shadows" style="margin-top:28px">
+      <div><div class="box" style="box-shadow:var(--shadow-sm)"></div><div class="lab">shadow-sm</div></div>
+      <div><div class="box" style="box-shadow:var(--shadow-md)"></div><div class="lab">shadow-md</div></div>
+      <div><div class="box" style="box-shadow:var(--shadow-lg)"></div><div class="lab">shadow-lg</div></div>
+    </div>
+  </section>
+
+  <div class="foot">Lélegzet Jógastúdió · Budapest, XI. kerület, Bartók Béla út 42. · Design rendszer v1</div>
+</div>
+</body>
+</html>
