@@ -5,7 +5,9 @@ Meleg, földes, prémium hangulat: nyugalom, természetes fény, lassú tempó.
 
 ## Megnyitás
 
-- **Élő oldal:** nyisd meg az [`index.html`](index.html) fájlt böngészőben (reszponzív).
+- **Élő oldal (GitHub Pages):** https://gergelyborda23-design.github.io/Lelegzet-Jogastudio/
+- **Helyben:** töltsd le a repót, és nyisd meg az `index.html`-t böngészőben (reszponzív).
+  *(GitHubon a fájlra kattintva csak a forráskód látszik — a renderelt oldalt a fenti Pages-link vagy a helyi megnyitás mutatja.)*
 - **Teljes oldal render (egy képen):** `Lélegzet - Weboldal design PRO - Borda Gergely.png`
 
 ## Design rendszer
