@@ -63,7 +63,11 @@ h3{font-size:1.375rem;font-weight:500}
 .nav-links a{color:var(--cream-on-dark);text-decoration:none;font-size:.95rem;font-weight:500;opacity:.9;transition:opacity .2s}
 .nav-links a:hover{opacity:1}
 .nav .btn{padding:11px 22px;font-size:.85rem}
-.nav-toggle{display:none}
+.nav-toggle{display:none;flex-direction:column;justify-content:center;gap:6px;width:44px;height:44px;padding:0;background:none;border:0;cursor:pointer}
+.nav-toggle span{display:block;width:26px;height:2px;background:var(--cream-on-dark);border-radius:2px;margin:0 auto;transition:transform .25s ease,opacity .2s ease}
+.nav-toggle.is-open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.nav-toggle.is-open span:nth-child(2){opacity:0}
+.nav-toggle.is-open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
 
 /* ---- HERO (variant 02) ---- */
 .hero{position:relative;min-height:100svh;display:grid;place-items:center;text-align:center;color:var(--cream-on-dark);overflow:hidden}
@@ -169,7 +173,12 @@ td.off{color:#B4AE9E}
   .footer .inner{grid-template-columns:1fr 1fr}
 }
 @media(max-width:640px){
-  .nav-links{display:none}
+  .nav-toggle{display:flex}
+  .nav-links{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;
+    background:var(--olive-deep);padding:8px var(--pad) 16px;box-shadow:var(--shadow-lg);display:none}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:15px 2px;width:100%;border-bottom:1px solid rgba(255,255,255,.10);font-size:1.05rem;opacity:1}
+  .nav-links a:last-child{border-bottom:0}
   .grid4,.prices{grid-template-columns:1fr}
   .footer .inner{grid-template-columns:1fr}
 }
@@ -183,12 +192,15 @@ td.off{color:#B4AE9E}
   <nav class="nav">
     <div class="nav-inner">
       <a href="#top" class="brand">Lélegzet Jógastúdió</a>
-      <div class="nav-links">
+      <div class="nav-links" id="navlinks">
         <a href="#oraink">Óráink</a>
         <a href="#oktatok">Oktatók</a>
         <a href="#arak">Árak</a>
         <a href="#kapcsolat">Kapcsolat</a>
       </div>
+      <button class="nav-toggle" aria-label="Menü" aria-expanded="false" aria-controls="navlinks">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
   <div class="inner">
@@ -399,5 +411,18 @@ td.off{color:#B4AE9E}
   <div class="bottom">© 2026 Lélegzet Jógastúdió · Újbuda — Minden jog fenntartva</div>
 </footer>
 
+<script>
+(function(){
+  var t=document.querySelector('.nav-toggle'), l=document.getElementById('navlinks');
+  if(!t||!l)return;
+  function close(){l.classList.remove('open');t.classList.remove('is-open');t.setAttribute('aria-expanded','false');}
+  t.addEventListener('click',function(){
+    var open=l.classList.toggle('open');
+    t.classList.toggle('is-open',open);
+    t.setAttribute('aria-expanded',open?'true':'false');
+  });
+  l.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close);});
+})();
+</script>
 </body>
 </html>
